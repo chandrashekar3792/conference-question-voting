@@ -1,18 +1,15 @@
 package com.creaza.conferencevoting.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-
 @Entity
 @Table(name = "questions")
-@EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
 public class Question {
@@ -31,30 +28,32 @@ public class Question {
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @CreationTimestamp
     private Date createdAt;
 
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @UpdateTimestamp
     private Date updatedAt;
 
-//    @Column(name = "version")
     @Version
     private long version;
 
     public Question() {
 
     }
+
     public Question(String title, String category) {
         super();
         this.title = title;
         this.category = category;
     }
-    public Long getId(){
+
+    public Long getId() {
         return id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -70,28 +69,29 @@ public class Question {
     public void setCategory(String category) {
         this.category = category;
     }
-    public Integer getVotes(){
+
+    public Integer getVotes() {
         return votes;
     }
 
-    public Date getCreatedAt(){
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt(){
+    public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setDefaultVote(){
-        this.votes= 0;
-    }
-
-    public void setVotes(){
-        this.votes++;
     }
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public void setDefaultVote() {
+        this.votes = 0;
+    }
+
+    public void incrementVotes() {
+        this.votes++;
     }
 }
 

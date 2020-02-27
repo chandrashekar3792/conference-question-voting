@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -22,6 +21,7 @@ public class QuestionsController {
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/questions")
     public Question createQuestion(@Valid @RequestBody Question question) {
@@ -34,14 +34,14 @@ public class QuestionsController {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Question", "id", questionId));
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/questions/{id}/vote")
     public Question updateQuestion(@PathVariable(value = "id") Long questionId) {
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Question", "id", questionId));
-        question.setUpdatedAt(new Date());
-        question.setVotes();
+        question.incrementVotes();
 
         Question updatedQuestion = questionRepository.save(question);
         return updatedQuestion;

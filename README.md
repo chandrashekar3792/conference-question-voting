@@ -27,8 +27,16 @@
  mvn clean install
  java -jar target/conference-voting-0.0.1-SNAPSHOT.jar
  ```
+ OR
+
+ Use Docker to run
+ ```
+ cd backend
+ docker build -t backend . && docker run -it backend
+ ```
 
  This uses the port 8080.
+ To run with MySQL, use the "prod" Spring Boot profile
 
  ### Frontend
 
@@ -36,6 +44,14 @@
 cd frontend
 npm install
 npm start
+```
+
+OR
+
+Use Docker to run
+```
+ cd frontend
+ docker build -t frontend . && docker run -it frontend
 ```
 This uses the port `3000`. So navigate to http://localhost:3000.
 
