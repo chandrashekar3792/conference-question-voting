@@ -20,6 +20,7 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
+          <Route exact path="/"> <Redirect to="/questions" /></Route>
             <Route exact path='/questions' component={ListQuestions} />
             <Route exact path='/questions/add' component={AddQuestion} />
             <Route exact path='/questions/vote' component={VoteQuestion} />
@@ -31,3 +32,7 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+

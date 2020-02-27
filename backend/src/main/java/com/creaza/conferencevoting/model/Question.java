@@ -26,7 +26,6 @@ public class Question {
     @NotBlank
     private String category;
 
-    @NotBlank
     private Integer votes;
 
 
@@ -40,6 +39,10 @@ public class Question {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+//    @Column(name = "version")
+    @Version
+    private long version;
 
     public Long getId(){
         return id;
@@ -90,5 +93,6 @@ public class Question {
 //  category varchar(255) NOT NULL,
 //  votes int  NOT NULL DEFAULT 0,
 //  created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-//  updated_at timestamp DEFAULT CURRENT_TIMESTAMP
+//  updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
+//  version bigint NOT NULL DEFAULT 0
 //);

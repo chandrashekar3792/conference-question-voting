@@ -22,7 +22,7 @@ public class QuestionsController {
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/questions")
     public Question createQuestion(@Valid @RequestBody Question question) {
         question.setDefaultVote();
@@ -34,10 +34,9 @@ public class QuestionsController {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Question", "id", questionId));
     }
-
-        @PutMapping("/questions/{id}/vote")
-    public Question updateQuestion(@PathVariable(value = "id") Long questionId,
-                           @Valid @RequestBody Question questionDetails) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/questions/{id}/vote")
+    public Question updateQuestion(@PathVariable(value = "id") Long questionId) {
 
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Question", "id", questionId));
