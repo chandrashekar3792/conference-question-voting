@@ -1,0 +1,104 @@
+
+header {
+    display: block;
+}
+div {
+    display: block;
+}
+.navbar{
+    background-color: #20232a;
+    color: #ffffff;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.navbar-header{
+        width: 100%;
+        /* padding-left: 20px; */
+        /* padding-right: 20px; */
+        margin-left: auto;
+        margin-right: auto;
+    
+}
+.navbar-top {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+}
+
+
+.navbar-tabs {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    margin-right: 10px;
+    height: 100%;
+    align-items: center;
+    color: #61dafb;
+}
+
+.navbar-anchor{
+    width: 100%;
+}
+.navbar-span{
+    color: inherit;
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #61dafb;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+
+.nav-header{
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-item{
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+    transition: color 0.2s ease-out;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 300;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -webkit-transition: color 0.2s
+}
