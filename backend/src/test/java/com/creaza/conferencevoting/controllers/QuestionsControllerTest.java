@@ -1,6 +1,7 @@
 package com.creaza.conferencevoting.controllers;
 
 import org.json.JSONException;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,16 @@ public class QuestionsControllerTest {
     HttpHeaders headers = new HttpHeaders();
     @LocalServerPort
     private int port;
+
+    @Before
+    public void inti() {
+        Question question = new Question("How much does the conference ticket cost?", "About");
+        HttpEntity<Question> entity = new HttpEntity<Question>(question, headers);
+
+        restTemplate.exchange(
+                createURLWithPort("/api/v1/questions"),
+                HttpMethod.POST, entity, String.class);
+    }
 
     @Test
     public void addQuestion() {
