@@ -1,6 +1,6 @@
 # conference vote over a question 
 
-<h3 align="center">An application that will let participants at a conference vote over a question given by a speaker</h3>
+<h4 align="center">An application that will let participants at a conference vote over a question given by a speaker</h4>
 
 ## Technologies
 
