@@ -46,7 +46,7 @@ This uses the port `3000`. So navigate to http://localhost:3000.
 
 ## Running Tests
 
-In case if you like to run the tests alone, use the below Maven command -
+Use the below Maven command to run test cases -
 
 ```bash
 mvn clean test
@@ -54,6 +54,6 @@ mvn clean test
 
 ## API Documentation
 
-Swagger is included in the project and hence to access the API Documentation, open http://localhost:8080/swagger-ui.html from the browser.
+Swagger API Documentation. Open http://localhost:8080/swagger-ui.html from the browser.
 Example:-
 <img src="results/APIDoc.png" alt="API DOc">
