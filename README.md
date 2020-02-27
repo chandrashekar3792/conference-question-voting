@@ -1,4 +1,4 @@
-# conference vote over a question 
+# Conference vote over a question 
 
 <h4 align="center">An application that will let participants at a conference vote over a question given by a speaker</h4>
 
