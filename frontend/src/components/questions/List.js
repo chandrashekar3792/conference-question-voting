@@ -8,7 +8,7 @@ import "./Style.css";
 let EachQuestion=(request)=>{
   return request.data.map((question, i)=>{
       return(<div className="flex flex3">
-        <div className="child flex3-child">{question.id}</div>
+        <div className="child flex3-child">{i+1}</div>
         <div className="child flex3-child flex-child-large">{question.title}</div>
         <div className="child flex3-child flex-child-medium">{question.category}</div>
         <div className="child flex3-child">{question.votes}</div>

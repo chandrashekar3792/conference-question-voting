@@ -44,6 +44,14 @@ public class Question {
     @Version
     private long version;
 
+    public Question() {
+
+    }
+    public Question(String title, String category) {
+        super();
+        this.title = title;
+        this.category = category;
+    }
     public Long getId(){
         return id;
     }
@@ -87,12 +95,3 @@ public class Question {
     }
 }
 
-//CREATE TABLE questions (
-//  id int PRIMARY KEY AUTO_INCREMENT,
-//  title varchar(255) NOT NULL,
-//  category varchar(255) NOT NULL,
-//  votes int  NOT NULL DEFAULT 0,
-//  created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-//  updated_at timestamp DEFAULT CURRENT_TIMESTAMP,
-//  version bigint NOT NULL DEFAULT 0
-//);
