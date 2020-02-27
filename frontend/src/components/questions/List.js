@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import {Header} from "../header/Header";
-import {getQuestions} from "../API/questions"
+import {getQuestions} from "../../API/questions"
 import "./Style.css";
 
 let EachQuestion=(request)=>{
@@ -46,8 +46,6 @@ class ListQuestions extends Component {
             <div className="child flex2-child flex-child-medium">Category</div>
             <div className="child flex2-child">Votes</div>
           </div>
-          <EachQuestion data={this.state.questions}/>
-          <EachQuestion data={this.state.questions}/>
           <EachQuestion data={this.state.questions}/>
         </div>    
       </div>

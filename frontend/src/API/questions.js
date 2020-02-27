@@ -1,26 +1,23 @@
 import axios from "axios";
-import constants from "../../config/constants";
+import constants from "../config/constants";
 axios.defaults.baseURL = constants.apiUrl;
-
-export const loginAPI = (email,password) => {
-  try{
-    const requestUrl = "login";
-    return axios.post(requestUrl, {email,password});
-    
-  }catch(err){
-    throw err;
-  }
-};
-
-export const registerAPI=(email,mobile,password)=>{
-  const requestUrl = "register";
-  return axios.post(requestUrl, {email,mobile,password});
+export const voteQuestion=(id)=>{
+  const requestUrl = `api/v1/questions/${id}/vote`;
+  return axios.put(requestUrl, {});
 }
 
-export const verifyUser=(email,token)=>{
-  const requestUrl = "verifyUser";
-  return axios.post(requestUrl, {email,token});
+export const addQuestion=(title,category)=>{
+  try{
+    const requestUrl = "api/v1/questions";
+    return axios.post(requestUrl, {title,category});
+  }catch (e) {
+    throw e;
+  }
 }
 export const getQuestions=()=>{
-    return axios.get('api/v1/questions')//the token is a variable which holds the token
+    try{
+      return axios.get('api/v1/questions')
+    }catch (e) {
+      throw e;
+    }
 }
