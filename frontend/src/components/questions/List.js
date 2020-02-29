@@ -5,13 +5,23 @@ import {Header} from "../header/Header";
 import {getQuestions} from "../../API/questions"
 import "./Style.css";
 
+let EachOptions=(request)=>{
+  return request.choices.map((choice, i)=>{
+    return(<div className="choices-list card">
+      <div>{choice.statement}:</div>
+      <div><b>{choice.votes}</b></div>
+    </div>)
+})
+}
 let EachQuestion=(request)=>{
   return request.data.map((question, i)=>{
       return(<div className="flex flex3">
         <div className="child flex3-child">{i+1}</div>
         <div className="child flex3-child flex-child-large">{question.title}</div>
         <div className="child flex3-child flex-child-medium">{question.category}</div>
-        <div className="child flex3-child">{question.votes}</div>
+        <div className="child flex3-child flex-child-large choices-div">
+          <EachOptions choices={question.choices}/>
+        </div>
       </div>)
   })
 }
@@ -44,7 +54,7 @@ class ListQuestions extends Component {
             <div className="child flex2-child">#</div>
             <div className="child flex2-child flex-child-large">Title</div>
             <div className="child flex2-child flex-child-medium">Category</div>
-            <div className="child flex2-child">Votes</div>
+            <div className="child flex2-child flex-child-large">Votes</div>
           </div>
           <EachQuestion data={this.state.questions}/>
         </div>    

@@ -10,8 +10,8 @@
 .flex {
     background-color: #f7f7f7;
     border-radius: 3px;
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     /* padding: 20px; */
 }
 .flex2-child {
@@ -40,10 +40,10 @@
     box-sizing: border-box;
 }
 .flex-child-large {
-    flex-grow: 0.7;
+    flex-grow: 0.5;
 }
 .flex-child-medium{
-    flex-grow: 0.3;
+    flex-grow: 0.2;
 }
 input[type=text], select {
     width: 100%;
@@ -68,7 +68,7 @@ input[type=text], select {
   }
 
   .pad-zero{
-    padding-top: 5px; 
+    padding-top: 0px;
     padding-left: 2%;
   }
 
@@ -79,7 +79,7 @@ input[type=text], select {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #17a2b8;
+    background-color:#2c3e50;
     width: auto;
   }
   
@@ -126,3 +126,85 @@ button[disabled]{
   pointer-events: all !important;
 }
 
+form{
+  width: 80%
+}
+
+.form-div{
+  display: flex;
+  align-items: center;
+}
+
+.input-label{
+  width: 15%
+}
+
+.form-control{
+  margin: 8px 27px;
+}
+
+.choices-div{
+  display: flex;
+  justify-content: flex-start;;
+}
+
+.choices-list{
+  display: flex;
+  padding-right: 11px;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 2em;
+  margin-right: 3%;
+  line-height: 2;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+.select-div{
+  display: flex;
+  justify-content: left;
+}

@@ -9,29 +9,46 @@ class AddQuestion extends Component {
         category:"",
         showError:false,
         errorMsg:"",
-        successMsg:""
+        successMsg:"",
+        options:{
+          option1:"",
+          option2:"",
+          option3:'',
+          option4:""
+        }
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
   }
   componentDidMount(){}
   handleUserInput(e) {
-    console.log("this.state",this.state)
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value, showError:false });
   }
+  handleUserOptions(e){
+    const name = e.target.name;
+    const value = e.target.value;
+    let newOptions=this.state.options;
+    newOptions[name]=value;
+    this.setState({ options: newOptions, showError:false });
+  }
   handleSubmit(event) {
     event.preventDefault()
         if (this.state.title && this.state.category) {
-            let {title,category}=this.state;
-            addQuestion(title,category)
+            let {title,category,options}=this.state;
+            addQuestion(title,category,options)
                 .then(json => {
-                    console.log("json",json);
                     this.setState({
                         successMsg: true,
                         title:"",
-                        category:""
+                        category:"",
+                        options:{
+                          option1:"",
+                          option2:"",
+                          option3:'',
+                          option4:""
+                        }
                     });
                 })
                 .catch(error => {
@@ -71,9 +88,48 @@ class AddQuestion extends Component {
               name="category" 
               placeholder="Your Question Category"
               onChange={this.handleUserInput.bind(this)} />
-
+             <div className="form-div">
+                  <label className="input-label">Option 1</label>
+                  <input style={{marginRight:20}}
+                    type="text" 
+                    id="option1"
+                    name="option1"
+                    placeholder="Enter Option 1"
+                    value={this.state.options.option1}
+                    onChange={this.handleUserOptions.bind(this)}
+                    className="form-control"/>
+                  <label className="input-label">Option 2</label>
+                  <input
+                    type="text" 
+                    id="option2"
+                    name="option2"
+                    placeholder="Enter Option 2"
+                    value={this.state.options.option2}
+                    onChange={this.handleUserOptions.bind(this)}
+                    className="form-control"/>
+              </div>
+              <div className="form-div">
+                  <label  className="input-label">Option 3</label>
+                  <input style={{marginRight:20}}
+                    type="text" 
+                    id="option3"
+                    name="option3"
+                    placeholder="Enter Option 3"
+                    value={this.state.options.option3}
+                    onChange={this.handleUserOptions.bind(this)}
+                    className="form-control"/>
+                
+                  <label  className="input-label">Option 4</label>
+                  <input
+                    type="text" 
+                    id="option4"
+                    name="option4"
+                    placeholder="Enter Option 4"
+                    value={this.state.options.option4}
+                    onChange={this.handleUserOptions.bind(this)}
+                    className="form-control"/>
+              </div>
             <input type="submit" value="Submit"/>
-            
             {this.state.successMsg &&(
               <div className="isa_info">
                 Question Added Successfully.
