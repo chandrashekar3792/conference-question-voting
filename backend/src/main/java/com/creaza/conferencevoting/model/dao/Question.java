@@ -1,4 +1,4 @@
-package com.creaza.conferencevoting.model;
+package com.creaza.conferencevoting.model.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,6 +7,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "questions")
@@ -14,17 +17,17 @@ import java.util.Date;
         allowGetters = true)
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Choice> choices;
 
     @NotBlank
     private String title;
 
     @NotBlank
     private String category;
-
-    private Integer votes;
-
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,21 +40,30 @@ public class Question {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @Version
-    private long version;
-
     public Question() {
 
     }
 
-    public Question(String title, String category) {
-        super();
+    public Question(@NotBlank String title, @NotBlank String category) {
+        this.choices = new HashSet<>();
         this.title = title;
         this.category = category;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Choice> getChoices() {
+        return choices;
+    }
+
+    public void addChoice(Choice choice) {
+        this.choices.add(choice);
+    }
+
+    public void removeChoice(Choice choice) {
+        this.choices.remove(choice);
     }
 
     public String getTitle() {
@@ -70,28 +82,17 @@ public class Question {
         this.category = category;
     }
 
-    public Integer getVotes() {
-        return votes;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return id.equals(question.id);
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setDefaultVote() {
-        this.votes = 0;
-    }
-
-    public void incrementVotes() {
-        this.votes++;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
 
