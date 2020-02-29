@@ -6,7 +6,8 @@ import {getQuestions} from "../../API/questions"
 import "./Style.css";
 
 let EachOptions=(request)=>{
-  return request.choices.map((choice, i)=>{
+  let choices=request.choices.sort((a, b) => (a.votes > b.votes) ? 1 : -1).reverse()
+  return choices.map((choice, i)=>{
     return(<div className="choices-list card">
       <div>{choice.statement}:</div>
       <div><b>{choice.votes}</b></div>
