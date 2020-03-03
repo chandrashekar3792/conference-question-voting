@@ -56,6 +56,7 @@ Use Docker to run
 This uses the port `3000`. So navigate to http://localhost:3000.
 
 ### Web pages
+<img src="results/Register.png" alt="Register">
 <img src="results/listQuestion.png" alt="List Questions">
 <img src="results/AddQuestion.png" alt="Add Question">
 <img src="results/VoteQuestion.png" alt="Vote Question">

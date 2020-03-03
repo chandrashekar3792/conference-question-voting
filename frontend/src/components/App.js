@@ -3,7 +3,7 @@ import { BrowserRouter, Route,Redirect } from "react-router-dom";
 import ListQuestions from "./questions/List";
 import AddQuestion from "./questions/Add";
 import VoteQuestion from "./questions/Vote";
-
+import Register from "./Auth/Register";
 class App extends Component {
   constructor(props){
     super(props)
@@ -20,7 +20,7 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-          <Route exact path="/"> <Redirect to="/questions" /></Route>
+          <Route exact path="/" component={Register}></Route>
             <Route exact path='/questions' component={ListQuestions} />
             <Route exact path='/questions/add' component={AddQuestion} />
             <Route exact path='/questions/vote' component={VoteQuestion} />

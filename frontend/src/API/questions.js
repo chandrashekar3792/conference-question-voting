@@ -2,8 +2,9 @@ import axios from "axios";
 import constants from "../config/constants";
 axios.defaults.baseURL = constants.apiUrl;
 export const voteQuestion=(id,choiceId)=>{
-  const requestUrl = `api/v1/questions/${id}/vote?choiceId=${choiceId}`;
-  return axios.put(requestUrl, {});
+  let user_id=localStorage.getItem("userid");
+  const requestUrl = `api/v1/votes?choiceId=${choiceId}&&questionId=${id}&&userId=${user_id}`;
+  return axios.post(requestUrl, {});
 }
 
 export const addQuestion=(title,category,options)=>{
@@ -21,4 +22,17 @@ export const getQuestions=()=>{
     }catch (e) {
       throw e;
     }
+}
+
+export const RegisterAPI=(email)=>{
+  try{
+    const requestUrl = "api/v1/users";
+    return axios.post(requestUrl, {email});
+  }catch (e) {
+    throw e;
+  }
+}
+export const getChoices=()=>{
+  const requestUrl="api/v1/choices";
+  return axios.get(requestUrl);
 }

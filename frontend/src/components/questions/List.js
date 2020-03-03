@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import {Header} from "../header/Header";
-import {getQuestions} from "../../API/questions"
+import {getQuestions,getChoices} from "../../API/questions"
 import "./Style.css";
 
 let EachOptions=(request)=>{
@@ -37,9 +37,26 @@ class ListQuestions extends Component {
   }
   componentDidMount(){
     getQuestions().then((result)=>{
-      console.log("result",result.data);
-      this.setState({
-        questions:result.data,
+      getChoices().then((choices)=>{
+        let questionsData=result.data;
+        for(let i=0;i<questionsData.length;i++){
+          console.log("uestionsData[i].choices",questionsData[i].choices)
+            for(let j=0;j<questionsData[i].choices.length;j++){
+              console.log("j")
+                let index=choices.data.findIndex((item)=>{
+                  console.log("item",item)
+                  return item.choiceId===questionsData[i].choices[j].id});
+                if(index>=0){
+                    questionsData[i].choices[j].votes=choices.data[index].voteCount;
+                }else{
+                  questionsData[i].choices[j].votes=0;
+                }
+            }
+          }
+        this.setState({
+          questions:questionsData,
+        })
+            
       })
     })
   }
