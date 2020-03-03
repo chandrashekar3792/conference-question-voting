@@ -41,7 +41,7 @@ public class Question {
     private Date updatedAt;
 
     public Question() {
-
+        this.choices = new HashSet<>();
     }
 
     public Question(@NotBlank String title, @NotBlank String category) {

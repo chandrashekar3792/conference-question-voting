@@ -12,13 +12,13 @@ public class QuestionUpdationDto {
 
     private String category;
 
-    private List<ChoiceDto> choices;
+    private List<ChoiceCreationDto> choices;
 
     public QuestionUpdationDto() {
 
     }
 
-    public QuestionUpdationDto(@NotNull Long id, String title, String category, List<ChoiceDto> choices) {
+    public QuestionUpdationDto(@NotNull Long id, String title, String category, List<ChoiceCreationDto> choices) {
         this.id = id;
         this.title = title;
         this.category = category;
@@ -49,11 +49,11 @@ public class QuestionUpdationDto {
         this.category = category;
     }
 
-    public List<ChoiceDto> getChoices() {
+    public List<ChoiceCreationDto> getChoices() {
         return choices;
     }
 
-    public void setChoices(List<ChoiceDto> choices) {
+    public void setChoices(List<ChoiceCreationDto> choices) {
         this.choices = choices;
     }
 

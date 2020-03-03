@@ -1,12 +1,10 @@
 package com.creaza.conferencevoting.service;
 
-import com.creaza.conferencevoting.exception.IncorrectChoiceException;
 import com.creaza.conferencevoting.exception.ResourceNotFoundException;
 import com.creaza.conferencevoting.model.dao.Choice;
 import com.creaza.conferencevoting.model.dao.Question;
 import com.creaza.conferencevoting.model.dto.QuestionCreationDto;
 import com.creaza.conferencevoting.model.dto.QuestionUpdationDto;
-import com.creaza.conferencevoting.repository.ChoiceRepository;
 import com.creaza.conferencevoting.repository.QuestionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +20,12 @@ public class QuestionsService {
     private static final Logger log = LoggerFactory.getLogger(QuestionsService.class);
 
     private QuestionRepository questionRepository;
-    private ChoiceRepository choiceRepository;
+    private ChoicesService choicesService;
 
     @Autowired
-    public QuestionsService(QuestionRepository questionRepository, ChoiceRepository choiceRepository) {
+    public QuestionsService(QuestionRepository questionRepository, ChoicesService choicesService) {
         this.questionRepository = questionRepository;
-        this.choiceRepository = choiceRepository;
+        this.choicesService = choicesService;
     }
 
     public List<Question> getAllQuestions() {
@@ -41,7 +39,7 @@ public class QuestionsService {
         Question created = questionRepository.save(new Question(question.getTitle(), question.getCategory()));
 
         question.getChoices().forEach(choice -> {
-            created.addChoice(choiceRepository.save(new Choice(choice.getStatement(), 0, created)));
+            created.addChoice(choicesService.createChoice(new Choice(choice.getStatement(), created)));
         });
 
         return questionRepository.save(created);
@@ -63,27 +61,12 @@ public class QuestionsService {
         }
         if (updatedQuestion.getChoices().size() > 0) {
             updatedQuestion.getChoices().forEach(choice -> {
-                existing.getChoices().add(choiceRepository.save(new Choice(choice.getStatement(), 0, existing)));
+                existing.getChoices().add(choicesService.createChoice(new Choice(choice.getStatement(), existing)));
                 questionRepository.save(existing);
             });
         }
 
         return questionRepository.save(existing);
-    }
-
-    public void voteForQuestion(Long id, Long choiceId) {
-        log.info("voting for a question - {} with choice - {}", id, choiceId);
-        getQuestionById(id);
-        choiceRepository.findById(choiceId)
-                .map(choice -> {
-                    if (choice.getQuestion().getId() == id) {
-                        choice.setVotes(choice.getVotes() + 1);
-                        return choiceRepository.save(choice);
-                    } else {
-                        throw new IncorrectChoiceException(id, choiceId);
-                    }
-                })
-                .orElseThrow(() -> new ResourceNotFoundException("Choice", "id", choiceId));
     }
 
     public void deleteQuestion(Long id) {

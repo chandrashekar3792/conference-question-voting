@@ -8,7 +8,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "choices")
@@ -28,7 +30,9 @@ public class Choice {
     @NotBlank
     private String statement;
 
-    private Integer votes;
+    @JsonIgnore
+    @OneToMany(mappedBy = "choice", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Vote> votes;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,18 +45,14 @@ public class Choice {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @JsonIgnore
-    @Version
-    private long version;
-
     public Choice() {
-
+        this.votes = new HashSet<>();
     }
 
-    public Choice(@NotBlank String statement, Integer votes, Question question) {
+    public Choice(@NotBlank String statement, Question question) {
         this.statement = statement;
-        this.votes = votes;
         this.question = question;
+        this.votes = new HashSet<>();
     }
 
     public Long getId() {
@@ -75,20 +75,17 @@ public class Choice {
         this.statement = statement;
     }
 
-    public Integer getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Integer votes) {
-        this.votes = votes;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    @JsonIgnore
+    public Integer getVoteCount() {
+        return votes.size();
     }
 
     @Override

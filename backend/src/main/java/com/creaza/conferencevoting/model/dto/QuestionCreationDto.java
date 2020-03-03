@@ -13,13 +13,13 @@ public class QuestionCreationDto {
     private String category;
 
     @Size(min = 1)
-    private List<ChoiceDto> choices;
+    private List<ChoiceCreationDto> choices;
 
     public QuestionCreationDto() {
 
     }
 
-    public QuestionCreationDto(@NotBlank String title, @NotBlank String category, List<ChoiceDto> choices) {
+    public QuestionCreationDto(@NotBlank String title, @NotBlank String category, List<ChoiceCreationDto> choices) {
         this.title = title;
         this.category = category;
         this.choices = choices;
@@ -41,11 +41,11 @@ public class QuestionCreationDto {
         this.category = category;
     }
 
-    public List<ChoiceDto> getChoices() {
+    public List<ChoiceCreationDto> getChoices() {
         return choices;
     }
 
-    public void setChoices(List<ChoiceDto> choices) {
+    public void setChoices(List<ChoiceCreationDto> choices) {
         this.choices = choices;
     }
 

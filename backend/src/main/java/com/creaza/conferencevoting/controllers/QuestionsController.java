@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/questions")
 @CrossOrigin(origins = "http://localhost:3000")
 public class QuestionsController {
 
@@ -29,13 +29,13 @@ public class QuestionsController {
         this.questionsService = questionsService;
     }
 
-    @GetMapping(path = "/questions", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Question> getAllQuestions() {
         log.info("new fetch request");
         return questionsService.getAllQuestions();
     }
 
-    @PostMapping(path = "/questions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity createQuestion(@RequestBody @Valid QuestionCreationDto question) {
         log.info("new creation request");
@@ -43,7 +43,7 @@ public class QuestionsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    @GetMapping(path = "/questions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getQuestionById(@PathVariable(value = "id") Long questionId) {
         log.info("new fetch by id request");
@@ -51,7 +51,7 @@ public class QuestionsController {
         return ResponseEntity.ok(question);
     }
 
-    @PutMapping(path = "/questions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity updateQuestion(@RequestBody @Valid QuestionUpdationDto question) {
         log.info("new update request");
@@ -59,14 +59,7 @@ public class QuestionsController {
         return ResponseEntity.ok(updated);
     }
 
-    @PutMapping(path = "/questions/{id}/vote", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity voteForQuestion(@PathVariable(value = "id") Long questionId, @RequestParam("choiceId") Long choiceId) {
-        log.info("new vote request");
-        questionsService.voteForQuestion(questionId, choiceId);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping(path = "/questions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteQuestion(@PathVariable(value = "id") Long questionId) {
         log.info("new delete request");
         questionsService.deleteQuestion(questionId);

@@ -1,46 +1,53 @@
 package com.creaza.conferencevoting.model.dto;
 
-import javax.validation.constraints.NotBlank;
-import java.util.Objects;
-
 public class ChoiceDto {
 
-    @NotBlank
-    private String statement;
+    private Long choiceId;
+
+    private Long questionId;
+
+    private Integer voteCount;
 
     public ChoiceDto() {
 
     }
 
-    public ChoiceDto(@NotBlank String statement) {
-        this.statement = statement;
+    public ChoiceDto(Long choiceId, Long questionId, Integer voteCount) {
+        this.choiceId = choiceId;
+        this.questionId = questionId;
+        this.voteCount = voteCount;
     }
 
-    public String getStatement() {
-        return statement;
+    public Long getChoiceId() {
+        return choiceId;
     }
 
-    public void setStatement(String statement) {
-        this.statement = statement;
+    public void setChoiceId(Long choiceId) {
+        this.choiceId = choiceId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChoiceDto choiceDto = (ChoiceDto) o;
-        return statement.equals(choiceDto.statement);
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(statement);
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Integer getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(Integer voteCount) {
+        this.voteCount = voteCount;
     }
 
     @Override
     public String toString() {
         return "ChoiceDto{" +
-                "statement='" + statement + '\'' +
+                "choiceId=" + choiceId +
+                ", questionId=" + questionId +
+                ", voteCount=" + voteCount +
                 '}';
     }
 }
